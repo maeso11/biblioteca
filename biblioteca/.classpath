@@ -3,5 +3,8 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jdk1.8.0_202"/>
 	<classpathentry kind="con" path="org.eclipse.fx.ide.jdt.core.JAVAFX_CONTAINER"/>
+	<classpathentry kind="lib" path="lib/bson-3.12.7.jar"/>
+	<classpathentry kind="lib" path="lib/mongodb-driver-core-3.12.7.jar"/>
+	<classpathentry kind="lib" path="lib/mongodb-driver-sync-3.12.7.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
