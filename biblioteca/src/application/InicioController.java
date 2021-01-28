@@ -3,6 +3,7 @@ package application;
 
 import javafx.event.ActionEvent;
 
+import org.bson.Document;
 import org.bson.codecs.configuration.CodecRegistries;
 import org.bson.codecs.configuration.CodecRegistry;
 import org.bson.codecs.pojo.PojoCodecProvider;
@@ -71,9 +72,48 @@ public class InicioController {
 				mongo.close();
 			}
 		}
-		
-		
-		
 	}
 
+	public void eliminarLibro (String isbn) {
+		MongoClient mongo = null;
+		try {
+			mongo = MongoClients.create();
+			MongoDatabase db = mongo.getDatabase("biblioteca");
+			
+			CodecRegistry pojoCodec = CodecRegistries.fromRegistries(MongoClientSettings.getDefaultCodecRegistry(),
+					CodecRegistries.fromProviders(PojoCodecProvider.builder().automatic(true).build()));
+			db = db.withCodecRegistry(pojoCodec);
+			MongoCollection<Libro> collection = db.getCollection("libros", Libro.class);
+			
+			collection.deleteOne(new Document("isbn", isbn));
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			if(mongo != null) {
+				mongo.close();
+			}
+		}
+	}
+	
+	public void actualizarLibro(String titulo, String tituloNuevo, String descripcionNuevo, String autorNuevo, String nombreEditorialNuevo
+			, String fechaNuevo) {
+		MongoClient mongo = null;
+		try {
+			mongo = MongoClients.create();
+			MongoDatabase db = mongo.getDatabase("biblioteca");
+			
+			CodecRegistry pojoCodec = CodecRegistries.fromRegistries(MongoClientSettings.getDefaultCodecRegistry(),
+					CodecRegistries.fromProviders(PojoCodecProvider.builder().automatic(true).build()));
+			db = db.withCodecRegistry(pojoCodec);
+			MongoCollection<Libro> collection = db.getCollection("libros", Libro.class);
+			
+			//collection.updateOne(eq("titulo", titulo), combine(set("titulo", tituloNuevo), set("autor", autorNuevo), set("descripcion", descripcionNuevo),set("editorial.nombre", nombreEditorialNuevo), set("editorial.fecha_publicacion", fechaNuevo)));
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			if(mongo != null) {
+				mongo.close();
+			}
+		}
+	}
 }
