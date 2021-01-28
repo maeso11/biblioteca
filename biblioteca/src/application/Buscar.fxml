@@ -15,12 +15,13 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="670.0" prefWidth="900.0" style="-fx-background-color: #D1F2EB;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.BuscarController">
    <children>
-      <ComboBox fx:id="comboBox" layoutX="84.0" layoutY="180.0" prefHeight="25.0" prefWidth="213.0" promptText="ISBN" />
-      <TextField fx:id="txtBuscar" layoutX="542.0" layoutY="180.0" prefHeight="25.0" prefWidth="182.0" promptText="Introduce los datos..." />
-      <Label layoutX="313.0" layoutY="79.0" text="FILTRO DE BUSQUEDA" textAlignment="CENTER" textFill="#0d0d0d">
+      <ComboBox fx:id="comboBox" layoutX="79.0" layoutY="182.0" prefHeight="25.0" prefWidth="213.0" promptText="ISBN" />
+      <TextField fx:id="txtBuscar" layoutX="333.0" layoutY="182.0" prefHeight="25.0" prefWidth="235.0" promptText="Introduce los datos..." />
+      <Label layoutX="347.0" layoutY="79.0" text="FILTRO DE BUSQUEDA" textAlignment="CENTER" textFill="#0d0d0d">
          <font>
             <Font name="Cooper Black" size="17.0" />
          </font>
       </Label>
+      <Button layoutX="609.0" layoutY="182.0" mnemonicParsing="false" onAction="#btnFiltrar" prefHeight="25.0" prefWidth="141.0" text="FILTRAR" />
    </children>
 </AnchorPane>
