@@ -102,12 +102,13 @@ public class InicioController {
 			mongo = MongoClients.create();
 			MongoDatabase db = mongo.getDatabase("biblioteca");
 			
-			CodecRegistry pojoCodec = CodecRegistries.fromRegistries(MongoClientSettings.getDefaultCodecRegistry(),
-					CodecRegistries.fromProviders(PojoCodecProvider.builder().automatic(true).build()));
-			db = db.withCodecRegistry(pojoCodec);
-			MongoCollection<Libro> collection = db.getCollection("libros", Libro.class);
 			
-			//collection.updateOne(eq("titulo", titulo), combine(set("titulo", tituloNuevo), set("autor", autorNuevo), set("descripcion", descripcionNuevo),set("editorial.nombre", nombreEditorialNuevo), set("editorial.fecha_publicacion", fechaNuevo)));
+			db.getCollection("libros").updateOne(new Document ("titulo", titulo), 
+					new Document("$set", new Document("editorial.nombre", nombreEditorialNuevo)
+					.append("titulo", tituloNuevo)
+					.append("autor", autorNuevo)
+					.append("descripcion", descripcionNuevo)
+					.append("editorial.fecha_publicacion", fechaNuevo)));
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {
