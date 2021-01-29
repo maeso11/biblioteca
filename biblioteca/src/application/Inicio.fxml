@@ -11,7 +11,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="670.0" prefWidth="900.0" style="-fx-background-color: #D1F2EB;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.InicioController">
    <children>
-      <Button layoutX="729.0" layoutY="510.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="81.0" text="Crear">
+      <Button layoutX="729.0" layoutY="510.0" mnemonicParsing="false" onAction="#crearLibro" prefHeight="30.0" prefWidth="81.0" text="Crear">
          <font>
             <Font size="14.0" />
          </font></Button>
@@ -88,12 +88,12 @@
       <TableView fx:id="tabla" layoutX="10.0" prefHeight="450.0" prefWidth="880.0">
         <columns>
             <TableColumn fx:id="descripcion" minWidth="0.0" prefWidth="151.0" text="DESCRIPCIÓN" />
-            <TableColumn fx:id="autor" minWidth="0.0" prefWidth="153.0" text="AUTOR" />
-            <TableColumn fx:id="editorial" minWidth="0.0" prefWidth="146.0" text="EDITORIAL" />
-            <TableColumn fx:id="fechaPublicacion" minWidth="0.0" prefWidth="143.0" text="FECHA PUBLICACIÓN" />
-          <TableColumn fx:id="isbn" prefWidth="154.0" text="ISBN" />
-          <TableColumn fx:id="titulo" prefWidth="132.0" text="TITULO" />
+            <TableColumn fx:id="autor" minWidth="0.0" prefWidth="165.0" text="AUTOR" />
+            <TableColumn fx:id="fechaPublicacion" minWidth="0.0" prefWidth="230.0" text="FECHA PUBLICACIÓN / EDITORIAL" />
+          <TableColumn fx:id="isbn" prefWidth="152.0" text="ISBN" />
+          <TableColumn fx:id="titulo" prefWidth="181.0" text="TITULO" />
         </columns>
       </TableView>
+      <Button layoutX="808.0" layoutY="450.0" mnemonicParsing="false" onAction="#refresh" text="G2 REFRESH" />
    </children>
 </AnchorPane>
