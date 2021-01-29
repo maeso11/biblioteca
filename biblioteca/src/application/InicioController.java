@@ -120,7 +120,15 @@ public class InicioController {
 		}
 	}
 
-	public void actualiza(ActionEvent ev) {
+	@FXML
+	public void initialize() {
+		this.isbn.setCellValueFactory(new PropertyValueFactory("isbn"));
+		this.titulo.setCellValueFactory(new PropertyValueFactory("titulo"));
+		this.autor.setCellValueFactory(new PropertyValueFactory("autor"));
+		this.fechaPublicacion.setCellValueFactory(new PropertyValueFactory("editorial"));
+		this.descripcion.setCellValueFactory(new PropertyValueFactory("descripcion"));
+		this.editorial.setCellValueFactory(new PropertyValueFactory("nombre"));
+		
 		MongoClient mongoClient = null;
 		try {
 			mongoClient = MongoClients.create();
@@ -154,15 +162,5 @@ public class InicioController {
 				mongoClient.close();
 			}
 		}
-	}
-
-	@FXML
-	public void initialize() {
-		this.isbn.setCellValueFactory(new PropertyValueFactory("isbn"));
-		this.titulo.setCellValueFactory(new PropertyValueFactory("titulo"));
-		this.autor.setCellValueFactory(new PropertyValueFactory("autor"));
-		this.fechaPublicacion.setCellValueFactory(new PropertyValueFactory("editorial"));
-		this.descripcion.setCellValueFactory(new PropertyValueFactory("descripcion"));
-		this.editorial.setCellValueFactory(new PropertyValueFactory("nombre"));
 	}
 }

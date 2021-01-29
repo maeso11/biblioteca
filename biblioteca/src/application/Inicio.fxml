@@ -85,7 +85,6 @@
             <Font size="14.0" />
          </font>
       </TextField>
-      <Button layoutX="526.0" layoutY="467.0" mnemonicParsing="false" onAction="#actualiza" text="Button" />
       <TableView fx:id="tabla" layoutX="10.0" prefHeight="450.0" prefWidth="880.0">
         <columns>
             <TableColumn fx:id="descripcion" minWidth="0.0" prefWidth="151.0" text="DESCRIPCIÓN" />
