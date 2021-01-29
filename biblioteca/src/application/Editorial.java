@@ -1,40 +1,27 @@
 package application;
 
 public class Editorial {
+	private String nombre;
+	private String fecha_publicacion;
 	
-	String nombre;
-	String fechaPublicacion;
-	
-	
-	public Editorial(String nombre, String fechaPublicacion) {
-		super();
-		this.nombre = nombre;
-		this.fechaPublicacion = fechaPublicacion;
+	public Editorial() {
+		
 	}
-	/**
-	 * @return the nombre
-	 */
 	public String getNombre() {
 		return nombre;
 	}
-	/**
-	 * @param nombre the nombre to set
-	 */
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	/**
-	 * @return the fechaPublicacion
-	 */
-	public String getFechaPublicacion() {
-		return fechaPublicacion;
+	public String getFecha_publicacion() {
+		return fecha_publicacion;
 	}
-	/**
-	 * @param fechaPublicacion the fechaPublicacion to set
-	 */
-	public void setFechaPublicacion(String fechaPublicacion) {
-		this.fechaPublicacion = fechaPublicacion;
+	public void setFecha_publicacion(String fecha_publicacion) {
+		this.fecha_publicacion = fecha_publicacion;
+	}
+	@Override
+	public String toString() {
+		return "Editorial [nombre=" + nombre + ", fecha_publicacion=" + fecha_publicacion + "]";
 	}
 
-	
 }
