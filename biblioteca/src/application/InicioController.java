@@ -96,9 +96,15 @@ public class InicioController {
 			String nombreEditorial = txtEditorial.getText();
 			String fecha = txtDescripcion.getText();
 
-			Document docEditorial = new Document().append("nombre", nombreEditorial).append("fecha_publicacion", fecha);
-			Document docLibro = new Document().append("isbn", isbn).append("titulo", titulo)
-					.append("descripcion", descripcion).append("autor", autor).append("editorial", docEditorial);
+			Document docEditorial = new Document()
+					.append("nombre", nombreEditorial)
+					.append("fecha_publicacion", fecha);
+			Document docLibro = new Document()
+					.append("isbn", isbn)
+					.append("titulo", titulo)
+					.append("descripcion", descripcion)
+					.append("autor", autor)
+					.append("editorial", docEditorial);
 
 			db.getCollection("libros").insertOne(docLibro);
 			cargarTabla();
@@ -151,6 +157,7 @@ public class InicioController {
 			mongo = MongoClients.create();
 			MongoDatabase db = mongo.getDatabase("biblioteca");
 
+			Libro libro = this.tabla.getSelectionModel().getSelectedItem();
 			String titulo = txtTitulo.getText();
 			String descripcion = txtDescripcion.getText();
 			String autor = txtAutor.getText();
@@ -158,7 +165,7 @@ public class InicioController {
 			String fecha = txtPublicacion.getText();
 			String isbn = txtIsbn.getText();
 
-			db.getCollection("libros").updateOne(new Document(),
+			db.getCollection("libros").updateOne(new Document("_id", libro.getId()),
 					new Document("$set",
 							new Document("editorial.nombre", nombreEditorial).append("titulo", titulo)
 									.append("autor", autor).append("descripcion", descripcion)
