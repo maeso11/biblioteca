@@ -1,99 +1,114 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="670.0" prefWidth="900.0" style="-fx-background-color: #D1F2EB;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.InicioController">
    <children>
-      <Button layoutX="729.0" layoutY="510.0" mnemonicParsing="false" onAction="#crearLibro" prefHeight="30.0" prefWidth="81.0" text="Crear">
+      <Button layoutX="745.0" layoutY="523.0" mnemonicParsing="false" onAction="#crearLibro" prefHeight="38.0" prefWidth="115.0" text="CREAR">
          <font>
             <Font size="14.0" />
          </font></Button>
-      <Button layoutX="818.0" layoutY="625.0" mnemonicParsing="false" onAction="#buscar" prefHeight="25.0" prefWidth="68.0" text="Buscar">
+      <Button layoutX="745.0" layoutY="357.0" mnemonicParsing="false" onAction="#filtrar" prefHeight="38.0" prefWidth="115.0" text="BUSCAR">
          <font>
             <Font size="14.0" />
          </font></Button>
-      <Button layoutX="729.0" layoutY="569.0" mnemonicParsing="false" text="Actualizar">
+      <Button layoutX="745.0" layoutY="610.0" mnemonicParsing="false" onAction="#actualizarLibro" prefHeight="38.0" prefWidth="115.0" text="ACTUALIZAR">
          <font>
             <Font size="14.0" />
          </font></Button>
-      <Button layoutX="729.0" layoutY="539.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="81.0" text="Eliminar">
+      <Button layoutX="745.0" layoutY="565.0" mnemonicParsing="false" onAction="#eliminarLibro" prefHeight="38.0" prefWidth="115.0" text="ELIMINAR">
          <font>
             <Font size="14.0" />
          </font></Button>
-      <TextField fx:id="txtIsbn" layoutX="203.0" layoutY="464.0" prefHeight="25.0" prefWidth="178.0">
+      <TextField fx:id="txtIsbn" layoutX="203.0" layoutY="464.0" prefHeight="25.0" prefWidth="178.0" promptText="ISBN...">
          <font>
             <Font size="14.0" />
          </font></TextField>
-      <TextField fx:id="txtTitulo" layoutX="203.0" layoutY="502.0" prefHeight="25.0" prefWidth="178.0">
+      <TextField fx:id="txtTitulo" layoutX="203.0" layoutY="502.0" prefHeight="25.0" prefWidth="178.0" promptText="Título...">
          <font>
             <Font size="14.0" />
          </font></TextField>
-      <TextField fx:id="txtPublicacion" layoutX="203.0" layoutY="577.0" prefHeight="25.0" prefWidth="178.0">
+      <TextField fx:id="txtPublicacion" layoutX="203.0" layoutY="577.0" prefHeight="25.0" prefWidth="178.0" promptText="Fecha de publicación...">
          <font>
             <Font size="14.0" />
          </font>
       </TextField>
-      <TextField fx:id="txtAutor" layoutX="203.0" layoutY="539.0" prefHeight="25.0" prefWidth="178.0">
+      <TextField fx:id="txtAutor" layoutX="203.0" layoutY="539.0" prefHeight="25.0" prefWidth="178.0" promptText="Autor...">
          <font>
             <Font size="14.0" />
          </font>
       </TextField>
-      <TextArea fx:id="txtDescripcion" layoutX="401.0" layoutY="542.0" prefHeight="103.0" prefWidth="301.0">
+      <TextArea fx:id="txtDescripcion" layoutX="401.0" layoutY="542.0" prefHeight="103.0" prefWidth="301.0" promptText="Descripción...">
          <font>
             <Font size="14.0" />
          </font>
       </TextArea>
-      <Label layoutX="59.0" layoutY="469.0" text="ISBN:">
+      <Label layoutX="39.0" layoutY="469.0" text="ISBN:">
          <font>
-            <Font size="14.0" />
+            <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Label layoutX="59.0" layoutY="505.0" text="TÍTULO:">
+      <Label layoutX="39.0" layoutY="505.0" text="TÍTULO:">
          <font>
-            <Font size="14.0" />
+            <Font name="System Bold" size="14.0" />
          </font>
       </Label>
       <Label layoutX="405.0" layoutY="507.0" text="DESCRIPCIÓN:">
          <font>
-            <Font size="14.0" />
+            <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Label layoutX="59.0" layoutY="543.0" text="AUTOR:">
+      <Label layoutX="39.0" layoutY="543.0" text="AUTOR:">
          <font>
-            <Font size="14.0" />
+            <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Label layoutX="58.0" layoutY="620.0" text="EDITORIAL:">
+      <Label layoutX="38.0" layoutY="620.0" text="EDITORIAL:">
          <font>
-            <Font size="14.0" />
+            <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Label layoutX="60.0" layoutY="581.0" text="FECHA PUBLICACIÓN:">
+      <Label layoutX="40.0" layoutY="581.0" text="FECHA PUBLICACIÓN:">
          <font>
-            <Font size="14.0" />
+            <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <TextField fx:id="txtEditorial" layoutX="203.0" layoutY="616.0" prefHeight="25.0" prefWidth="178.0">
+      <TextField fx:id="txtEditorial" layoutX="203.0" layoutY="616.0" prefHeight="25.0" prefWidth="178.0" promptText="Editorial...">
          <font>
             <Font size="14.0" />
          </font>
       </TextField>
-      <TableView fx:id="tabla" layoutX="10.0" prefHeight="450.0" prefWidth="880.0">
+      <TableView fx:id="tabla" layoutX="10.0" onMouseClicked="#seleccionaTabla" prefHeight="327.0" prefWidth="885.0">
         <columns>
-            <TableColumn fx:id="descripcion" minWidth="0.0" prefWidth="151.0" text="DESCRIPCIÓN" />
-            <TableColumn fx:id="autor" minWidth="0.0" prefWidth="165.0" text="AUTOR" />
-            <TableColumn fx:id="fechaPublicacion" minWidth="0.0" prefWidth="230.0" text="FECHA PUBLICACIÓN / EDITORIAL" />
+          <TableColumn fx:id="titulo" prefWidth="169.0" text="TITULO" />
+            <TableColumn fx:id="autor" minWidth="0.0" prefWidth="177.0" text="AUTOR" />
           <TableColumn fx:id="isbn" prefWidth="152.0" text="ISBN" />
-          <TableColumn fx:id="titulo" prefWidth="181.0" text="TITULO" />
+            <TableColumn fx:id="descripcion" minWidth="0.0" prefWidth="178.0" text="DESCRIPCIÓN" />
+            <TableColumn fx:id="fechaPublicacion" minWidth="0.0" prefWidth="203.0" text="FECHA PUBLICACIÓN / EDITORIAL" />
         </columns>
       </TableView>
-      <Button layoutX="808.0" layoutY="450.0" mnemonicParsing="false" onAction="#refresh" text="G2 REFRESH" />
+      <Button layoutX="745.0" layoutY="479.0" mnemonicParsing="false" onAction="#refresh" prefHeight="38.0" prefWidth="115.0" text="G2 REFRESH" />
+      <ComboBox fx:id="comboBox" layoutX="524.0" layoutY="383.0" prefHeight="25.0" prefWidth="178.0" promptText="Selecciona filtro" />
+      <TextField fx:id="txtBuscar" layoutX="524.0" layoutY="342.0" prefHeight="30.0" prefWidth="178.0" promptText="Introduce datos..." />
+      <ImageView fitHeight="74.0" fitWidth="76.0" layoutX="425.0" layoutY="338.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/lupamexivergas.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="91.0" fitWidth="96.0" layoutX="20.0" layoutY="327.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/logo.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

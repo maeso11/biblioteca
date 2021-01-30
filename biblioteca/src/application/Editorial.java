@@ -23,7 +23,7 @@ public class Editorial {
 
 	@Override
 	public String toString() {
-		return "Editorial [nombre=" + nombre + ", fecha_publicacion=" + fecha_publicacion + "]";
+		return " Nombre=" + nombre + ", Fecha publicación=" + fecha_publicacion;
 	}
 
 }
