@@ -14,98 +14,104 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="670.0" prefWidth="900.0" style="-fx-background-color: #D1F2EB;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.InicioController">
    <children>
-      <Button layoutX="745.0" layoutY="523.0" mnemonicParsing="false" onAction="#crearLibro" prefHeight="38.0" prefWidth="115.0" text="CREAR">
+      <Button fx:id="btnCrear" layoutX="745.0" layoutY="528.0" mnemonicParsing="false" onAction="#crearLibro" prefHeight="38.0" prefWidth="115.0" style="-fx-background-color: #70AB9F;" text="CREAR" textFill="WHITE">
          <font>
-            <Font size="14.0" />
+            <Font name="System Bold" size="14.0" />
          </font></Button>
-      <Button layoutX="745.0" layoutY="357.0" mnemonicParsing="false" onAction="#filtrar" prefHeight="38.0" prefWidth="115.0" text="BUSCAR">
+      <Button layoutX="745.0" layoutY="362.0" mnemonicParsing="false" onAction="#filtrar" prefHeight="38.0" prefWidth="115.0" style="-fx-background-color: #70AB9F;" text="BUSCAR" textFill="WHITE">
          <font>
-            <Font size="14.0" />
+            <Font name="System Bold" size="14.0" />
          </font></Button>
-      <Button layoutX="745.0" layoutY="610.0" mnemonicParsing="false" onAction="#actualizarLibro" prefHeight="38.0" prefWidth="115.0" text="ACTUALIZAR">
+      <Button layoutX="745.0" layoutY="615.0" mnemonicParsing="false" onAction="#actualizarLibro" prefHeight="38.0" prefWidth="115.0" style="-fx-background-color: #70AB9F;" text="ACTUALIZAR" textFill="WHITE">
          <font>
-            <Font size="14.0" />
+            <Font name="System Bold" size="14.0" />
          </font></Button>
-      <Button layoutX="745.0" layoutY="565.0" mnemonicParsing="false" onAction="#eliminarLibro" prefHeight="38.0" prefWidth="115.0" text="ELIMINAR">
+      <Button layoutX="745.0" layoutY="570.0" mnemonicParsing="false" onAction="#eliminarLibro" prefHeight="38.0" prefWidth="115.0" style="-fx-background-color: #70AB9F;" text="ELIMINAR" textFill="WHITE">
          <font>
-            <Font size="14.0" />
+            <Font name="System Bold" size="14.0" />
          </font></Button>
-      <TextField fx:id="txtIsbn" layoutX="203.0" layoutY="464.0" prefHeight="25.0" prefWidth="178.0" promptText="ISBN...">
+      <TextField fx:id="txtIsbn" layoutX="203.0" layoutY="469.0" prefHeight="25.0" prefWidth="178.0" promptText="ISBN...">
          <font>
             <Font size="14.0" />
          </font></TextField>
-      <TextField fx:id="txtTitulo" layoutX="203.0" layoutY="502.0" prefHeight="25.0" prefWidth="178.0" promptText="Título...">
+      <TextField fx:id="txtTitulo" layoutX="203.0" layoutY="507.0" prefHeight="25.0" prefWidth="178.0" promptText="Título...">
          <font>
             <Font size="14.0" />
          </font></TextField>
-      <TextField fx:id="txtPublicacion" layoutX="203.0" layoutY="577.0" prefHeight="25.0" prefWidth="178.0" promptText="Fecha de publicación...">
+      <TextField fx:id="txtPublicacion" layoutX="203.0" layoutY="582.0" prefHeight="25.0" prefWidth="178.0" promptText="Fecha de publicación...">
          <font>
             <Font size="14.0" />
          </font>
       </TextField>
-      <TextField fx:id="txtAutor" layoutX="203.0" layoutY="539.0" prefHeight="25.0" prefWidth="178.0" promptText="Autor...">
+      <TextField fx:id="txtAutor" layoutX="203.0" layoutY="544.0" prefHeight="25.0" prefWidth="178.0" promptText="Autor...">
          <font>
             <Font size="14.0" />
          </font>
       </TextField>
-      <TextArea fx:id="txtDescripcion" layoutX="401.0" layoutY="542.0" prefHeight="103.0" prefWidth="301.0" promptText="Descripción...">
+      <TextArea fx:id="txtDescripcion" layoutX="401.0" layoutY="547.0" prefHeight="103.0" prefWidth="301.0" promptText="Descripción...">
          <font>
             <Font size="14.0" />
          </font>
       </TextArea>
-      <Label layoutX="39.0" layoutY="469.0" text="ISBN:">
+      <Label layoutX="39.0" layoutY="474.0" text="ISBN:">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Label layoutX="39.0" layoutY="505.0" text="TÍTULO:">
+      <Label layoutX="39.0" layoutY="510.0" text="TÍTULO:">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Label layoutX="405.0" layoutY="507.0" text="DESCRIPCIÓN:">
+      <Label layoutX="405.0" layoutY="512.0" text="DESCRIPCIÓN:">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Label layoutX="39.0" layoutY="543.0" text="AUTOR:">
+      <Label layoutX="39.0" layoutY="548.0" text="AUTOR:">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Label layoutX="38.0" layoutY="620.0" text="EDITORIAL:">
+      <Label layoutX="38.0" layoutY="625.0" text="EDITORIAL:">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Label layoutX="40.0" layoutY="581.0" text="FECHA PUBLICACIÓN:">
+      <Label layoutX="40.0" layoutY="586.0" text="FECHA PUBLICACIÓN:">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <TextField fx:id="txtEditorial" layoutX="203.0" layoutY="616.0" prefHeight="25.0" prefWidth="178.0" promptText="Editorial...">
+      <TextField fx:id="txtEditorial" layoutX="203.0" layoutY="621.0" prefHeight="25.0" prefWidth="178.0" promptText="Editorial...">
          <font>
             <Font size="14.0" />
          </font>
       </TextField>
-      <TableView fx:id="tabla" layoutX="10.0" onMouseClicked="#seleccionaTabla" prefHeight="327.0" prefWidth="885.0">
+      <TableView fx:id="tabla" layoutX="8.0" layoutY="6.0" onMouseClicked="#seleccionaTabla" prefHeight="327.0" prefWidth="885.0" style="-fx-background-color: #70AB9F;">
         <columns>
-          <TableColumn fx:id="titulo" prefWidth="169.0" text="TITULO" />
-            <TableColumn fx:id="autor" minWidth="0.0" prefWidth="177.0" text="AUTOR" />
-          <TableColumn fx:id="isbn" prefWidth="152.0" text="ISBN" />
-            <TableColumn fx:id="descripcion" minWidth="0.0" prefWidth="178.0" text="DESCRIPCIÓN" />
-            <TableColumn fx:id="fechaPublicacion" minWidth="0.0" prefWidth="203.0" text="FECHA PUBLICACIÓN / EDITORIAL" />
+          <TableColumn fx:id="titulo" prefWidth="169.0" style="-fx-color: white;" text="TITULO" />
+            <TableColumn fx:id="autor" minWidth="0.0" prefWidth="177.0" style="-fx-color: white;" text="AUTOR" />
+          <TableColumn fx:id="isbn" prefWidth="152.0" style="-fx-color: white;" text="ISBN" />
+            <TableColumn fx:id="descripcion" minWidth="0.0" prefWidth="178.0" style="-fx-color: white;" text="DESCRIPCIÓN" />
+            <TableColumn fx:id="fechaPublicacion" minWidth="0.0" prefWidth="208.0" style="-fx-color: white;" text="FECHA PUBLICACIÓN / EDITORIAL" />
         </columns>
       </TableView>
-      <Button layoutX="745.0" layoutY="479.0" mnemonicParsing="false" onAction="#refresh" prefHeight="38.0" prefWidth="115.0" text="G2 REFRESH" />
-      <ComboBox fx:id="comboBox" layoutX="524.0" layoutY="383.0" prefHeight="25.0" prefWidth="178.0" promptText="Selecciona filtro" />
-      <TextField fx:id="txtBuscar" layoutX="524.0" layoutY="342.0" prefHeight="30.0" prefWidth="178.0" promptText="Introduce datos..." />
-      <ImageView fitHeight="74.0" fitWidth="76.0" layoutX="425.0" layoutY="338.0" pickOnBounds="true" preserveRatio="true">
+      <Button layoutX="745.0" layoutY="484.0" mnemonicParsing="false" onAction="#refresh" prefHeight="38.0" prefWidth="115.0" style="-fx-background-color: #70AB9F;" text="G2 REFRESH" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font></Button>
+      <ComboBox fx:id="comboBox" layoutX="524.0" layoutY="388.0" prefHeight="30.0" prefWidth="178.0" promptText="Selecciona filtro" />
+      <TextField fx:id="txtBuscar" layoutX="524.0" layoutY="347.0" prefHeight="30.0" prefWidth="178.0" promptText="Introduce datos...">
+         <font>
+            <Font size="14.0" />
+         </font></TextField>
+      <ImageView fitHeight="65.0" fitWidth="70.0" layoutX="431.0" layoutY="348.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/lupamexivergas.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="91.0" fitWidth="96.0" layoutX="20.0" layoutY="327.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="82.0" fitWidth="82.0" layoutX="40.0" layoutY="341.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../img/logo.png" />
          </image>

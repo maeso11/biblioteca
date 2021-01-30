@@ -11,6 +11,7 @@ import org.bson.Document;
 import org.bson.codecs.configuration.CodecRegistries;
 import org.bson.codecs.configuration.CodecRegistry;
 import org.bson.codecs.pojo.PojoCodecProvider;
+import org.bson.types.ObjectId;
 
 import com.mongodb.MongoClientSettings;
 import com.mongodb.MongoException;
@@ -24,6 +25,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -66,23 +69,9 @@ public class InicioController {
 	private ComboBox<String> comboBox;
 	@FXML
 	private TextField txtBuscar;
-
+	@FXML
+	private Button btnCrear;
 	private ObservableList<Libro> oLibro;
-
-	public void buscar(ActionEvent e) {
-		Stage primaryStage = new Stage();
-		((Node) e.getSource()).getScene().getWindow().hide();
-		try {
-			AnchorPane root = (AnchorPane) FXMLLoader.load(getClass().getResource("Buscar.fxml"));
-			Scene scene = new Scene(root, 900, 670);
-			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-			primaryStage.setScene(scene);
-			primaryStage.setResizable(false);
-			primaryStage.show();
-		} catch (Exception v) {
-			v.printStackTrace();
-		}
-	}
 
 	/**
 	 * Crea libro
@@ -120,6 +109,7 @@ public class InicioController {
 				mongo.close();
 			}
 		}
+
 	}
 
 	/**
@@ -127,7 +117,7 @@ public class InicioController {
 	 * 
 	 * @param isbn
 	 */
-	public void eliminarLibro() {
+	public void eliminarLibro() throws Exception {
 		MongoClient mongo = null;
 		try {
 			mongo = MongoClients.create();
@@ -166,12 +156,14 @@ public class InicioController {
 			String autor = txtAutor.getText();
 			String nombreEditorial = txtEditorial.getText();
 			String fecha = txtPublicacion.getText();
+			String isbn = txtIsbn.getText();
 
 			db.getCollection("libros").updateOne(new Document(),
 					new Document("$set",
 							new Document("editorial.nombre", nombreEditorial).append("titulo", titulo)
 									.append("autor", autor).append("descripcion", descripcion)
 									.append("editorial.fecha_publicacion", fecha)));
+
 			cargarTabla();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -182,11 +174,19 @@ public class InicioController {
 		}
 	}
 
+	/**
+	 * Refresca la tabla cargando los datos
+	 * 
+	 * @param ev
+	 */
 	@FXML
 	public void refresh(ActionEvent ev) {
 		cargarTabla();
 	}
 
+	/**
+	 * Inicio de la aplicacion
+	 */
 	@FXML
 	public void initialize() {
 		cargarTabla();
@@ -196,7 +196,7 @@ public class InicioController {
 	/**
 	 * Carga la tabla de la bbdd
 	 */
-	public void cargarTabla() {
+	public void cargarTabla() throws MongoException {
 		this.isbn.setCellValueFactory(new PropertyValueFactory("isbn"));
 		this.titulo.setCellValueFactory(new PropertyValueFactory("titulo"));
 		this.autor.setCellValueFactory(new PropertyValueFactory("autor"));
@@ -219,7 +219,6 @@ public class InicioController {
 
 			// Imprimir los datos de cada libro
 			FindIterable<Libro> libros = collection.find();
-			// FindIterable<Editorial> editoriales = collection2.find();
 			oLibro = FXCollections.observableArrayList();
 			for (Libro libro : libros) {
 				oLibro.add(libro);
@@ -237,6 +236,12 @@ public class InicioController {
 		}
 	}
 
+	/**
+	 * Selecciona el libro de la tabla
+	 * 
+	 * @param ev
+	 */
+	@FXML
 	public void seleccionaTabla(MouseEvent ev) {
 		Libro libro = this.tabla.getSelectionModel().getSelectedItem();
 
@@ -245,136 +250,75 @@ public class InicioController {
 			this.txtDescripcion.setText(libro.getDescripcion());
 			this.txtIsbn.setText(libro.getIsbn());
 			this.txtTitulo.setText(libro.getTitulo());
+			this.txtEditorial.setText(libro.getEditorial().getNombre());
+			this.txtPublicacion.setText(libro.getEditorial().getFecha_publicacion());
 		}
 	}
 
 	/**
 	 * Filtra
+	 * 
 	 * @param ev
 	 * @throws MongoException
 	 */
-	public void filtrar(ActionEvent ev) throws MongoException{
-		String valorComboBox = comboBox.getValue();
-		MongoClient mongoClient = null;
-		ObservableList<Libro> lLibro = FXCollections.observableArrayList();
-		try {
-			mongoClient = MongoClients.create();
-			MongoDatabase database = mongoClient.getDatabase("biblioteca");
+	@FXML
+	public void filtrar(ActionEvent ev) throws MongoException {
+			String valorComboBox = comboBox.getValue();
+			MongoClient mongoClient = null;
+			ObservableList<Libro> lLibro = FXCollections.observableArrayList();
+			try {
+				mongoClient = MongoClients.create();
+				MongoDatabase database = mongoClient.getDatabase("biblioteca");
 
-			if (valorComboBox == "ISBN") {
-				Document doc = new Document("isbn", txtBuscar.getText());
-				FindIterable find = database.getCollection("libros").find(doc);
-
-				Libro libro;
-				Editorial editorial;
-				Iterator<Document> iterator = find.iterator();
-
-				while (iterator.hasNext()) {
-					doc = iterator.next();
-					libro = new Libro();
-					editorial = new Editorial();
-					libro.setIsbn(doc.getString("isbn"));
-					libro.setTitulo(doc.getString("titulo"));
-					libro.setAutor(doc.getString("autor"));
-					libro.setDescripcion(doc.getString("descripcion"));
-					editorial.setNombre(doc.getString("nombre"));
-					editorial.setFecha_publicacion(doc.getString("fecha_publicacion"));
-					lLibro.add(libro);
-					tabla.setItems(lLibro);
+				if (valorComboBox == "ISBN") {
+					metodoFiltrar(database, lLibro, "isbn");
+				} else if (valorComboBox == "AUTOR") {
+					metodoFiltrar(database, lLibro, "autor");
+				} else if (valorComboBox == "EDITORIAL") {
+					metodoFiltrar(database, lLibro, "editorial.nombre");
+				} else if (valorComboBox == "FECHA DE PUBLICACION") {
+					metodoFiltrar(database, lLibro, "editorial.fecha_publicacion");
+				} else if (valorComboBox == "TITULO") {
+					metodoFiltrar(database, lLibro, "titulo");
 				}
-			} else if (valorComboBox == "AUTOR") {
-				Document doc = new Document("autor", txtBuscar.getText());
-				FindIterable find = database.getCollection("libros").find(doc);
-
-				Libro libro;
-				Editorial editorial;
-				Iterator<Document> iterator = find.iterator();
-
-				while (iterator.hasNext()) {
-					doc = iterator.next();
-					libro = new Libro();
-					editorial = new Editorial();
-					libro.setIsbn(doc.getString("isbn"));
-					libro.setTitulo(doc.getString("titulo"));
-					libro.setAutor(doc.getString("autor"));
-					libro.setDescripcion(doc.getString("descripcion"));
-					editorial.setNombre(doc.getString("nombre"));
-					editorial.setFecha_publicacion(doc.getString("fecha_publicacion"));
-					lLibro.add(libro);
-					tabla.setItems(lLibro);
-				}
-			} else if (valorComboBox == "EDITORIAL") {
-				Document doc = new Document("editorial.nombre", txtBuscar.getText());
-				FindIterable find = database.getCollection("libros").find(doc);
-
-				Libro libro;
-				Editorial editorial;
-				Iterator<Document> iterator = find.iterator();
-
-				while (iterator.hasNext()) {
-					doc = iterator.next();
-					libro = new Libro();
-					editorial = new Editorial();
-					libro.setIsbn(doc.getString("isbn"));
-					libro.setTitulo(doc.getString("titulo"));
-					libro.setAutor(doc.getString("autor"));
-					libro.setDescripcion(doc.getString("descripcion"));
-					editorial.setNombre(doc.getString("nombre"));
-					editorial.setFecha_publicacion(doc.getString("fecha_publicacion"));
-					lLibro.add(libro);
-					tabla.setItems(lLibro);
-				}
-			} else if (valorComboBox == "FECHA DE PUBLICACION") {
-				Document doc = new Document("editorial.fecha_publicacion", txtBuscar.getText());
-				FindIterable find = database.getCollection("libros").find(doc);
-
-				Libro libro;
-				Editorial editorial;
-				Iterator<Document> iterator = find.iterator();
-
-				while (iterator.hasNext()) {
-					doc = iterator.next();
-					libro = new Libro();
-					editorial = new Editorial();
-					libro.setIsbn(doc.getString("isbn"));
-					libro.setTitulo(doc.getString("titulo"));
-					libro.setAutor(doc.getString("autor"));
-					libro.setDescripcion(doc.getString("descripcion"));
-					editorial.setNombre(doc.getString("nombre"));
-					editorial.setFecha_publicacion(doc.getString("fecha_publicacion"));
-					lLibro.add(libro);
-					tabla.setItems(lLibro);
-				}
-			} else if (valorComboBox == "TITULO") {
-				Document doc = new Document("titulo", txtBuscar.getText());
-				FindIterable find = database.getCollection("libros").find(doc);
-
-				Libro libro;
-				Editorial editorial;
-				Iterator<Document> iterator = find.iterator();
-
-				while (iterator.hasNext()) {
-					doc = iterator.next();
-					libro = new Libro();
-					editorial = new Editorial();
-					libro.setIsbn(doc.getString("isbn"));
-					libro.setTitulo(doc.getString("titulo"));
-					libro.setAutor(doc.getString("autor"));
-					libro.setDescripcion(doc.getString("descripcion"));
-					editorial.setNombre(doc.getString("nombre"));
-					editorial.setFecha_publicacion(doc.getString("fecha_publicacion"));
-					lLibro.add(libro);
-					tabla.setItems(lLibro);
+			} catch (MongoException e) {
+				// handle MongoDB exception
+				e.printStackTrace();
+				throw e;
+			} finally {
+				if (null != mongoClient) {
+					mongoClient.close();
 				}
 			}
-		} catch (MongoException e) {
-			// handle MongoDB exception
-			e.printStackTrace();
-			throw e;
-		} finally {
-			if (null != mongoClient) {
-				mongoClient.close();
-			}
+	}
+
+	/**
+	 * Filtra por el parametro pasado
+	 * 
+	 * @param database
+	 * @param lLibro
+	 * @param tipoFiltro
+	 */
+	public void metodoFiltrar(MongoDatabase database, ObservableList<Libro> lLibro, String tipoFiltro) {
+		Document doc = new Document(tipoFiltro, txtBuscar.getText());
+		FindIterable find = database.getCollection("libros").find(doc);
+
+		Libro libro;
+		Editorial editorial;
+		Iterator<Document> iterator = find.iterator();
+
+		while (iterator.hasNext()) {
+			doc = iterator.next();
+			libro = new Libro();
+			editorial = new Editorial();
+			libro.setIsbn(doc.getString("isbn"));
+			libro.setTitulo(doc.getString("titulo"));
+			libro.setAutor(doc.getString("autor"));
+			libro.setDescripcion(doc.getString("descripcion"));
+			editorial.setNombre(doc.getString("nombre"));
+			editorial.setFecha_publicacion(doc.getString("fecha_publicacion"));
+			lLibro.add(libro);
+			tabla.setItems(lLibro);
 		}
 	}
 }
